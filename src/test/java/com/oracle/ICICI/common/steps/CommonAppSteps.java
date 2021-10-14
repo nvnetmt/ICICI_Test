@@ -20,7 +20,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 import java.util.Date;
-import com.report.oracle.ofs.ReportGeneration;
+import com.oracle.acs.util.report.ReportGeneration;
 import java.text.ParseException;
 
 public class CommonAppSteps extends BrowserDriverUtil{

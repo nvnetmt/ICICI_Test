@@ -14,8 +14,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import io.cucumber.java.en.Then;
-import com.report.oracle.ofs.ReportGeneration;
-import xlsx.databank.ofs.ExcelOperations;
+import com.oracle.acs.util.report.ReportGeneration;
+import com.oracle.acs.util.ExcelOperations;
 
 public class NotificationsSteps {
 	public static ReportGeneration rpt = ReportingSteps.getRpt();

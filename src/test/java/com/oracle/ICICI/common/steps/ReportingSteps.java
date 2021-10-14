@@ -8,7 +8,7 @@ import com.oracle.acs.util.BrowserDriverUtil;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
-import com.report.oracle.ofs.ReportGeneration;
+import com.oracle.acs.util.report.ReportGeneration;
 
 public class ReportingSteps extends BrowserDriverUtil{
 

@@ -1,6 +1,6 @@
-// 
+//
 // Decompiled by Procyon v0.5.36
-// 
+//
 
 package com.oracle.acs.util;
 
@@ -75,13 +75,21 @@ public class BrowserDriverUtil
     private static Long longSleep;
     private static Long shortestSleep;
     private static int totalSleepTime;
-    
+
     public static void init() {
         try {
+            try{
+                PropertyUtils.loadProperties(new FileInputStream("src/test/resources/propertyFiles/default/system-default.properties"),true);
+                PropertyUtils.loadProperties(new FileInputStream("src/test/resources/propertyFiles/ofs-dev/dev.properties"),true);
+            }
+            catch(IOException IOE)
+            {
+            }
             final String platform = System.getProperty("os.name");
             BrowserDriverUtil.loggerBrowser.info("OS Platform: " + platform);
             if (BrowserDriverUtil.os.contains("Windows")) {
                 BrowserDriverUtil.defaultBrowserDownloadPath = BrowserDriverUtil.userHome + "\\Downloads\\";
+                System.setProperty("webdriver.chrome.driver", PropertyUtils.getProperty("chromeDriverPath"));
             }
             else if (BrowserDriverUtil.os.contains("inux")) {
                 BrowserDriverUtil.driverPath = PropertyUtils.getProperty("chromeDriverPathLinux");
@@ -99,7 +107,7 @@ public class BrowserDriverUtil
             BrowserDriverUtil.loggerBrowser.error("FAILED TO READ PLATFORM.", (Throwable)e);
         }
     }
-    
+
     public static void loadPropertiesFile(final String file, final boolean importAll) throws IOException {
         String path = null;
         InputStream is = null;
@@ -124,7 +132,7 @@ public class BrowserDriverUtil
         PropertyUtils.loadProperties(is, importAll);
         PropertyUtils.dumpProperties();
     }
-    
+
     private static WebDriver createChromeDriver(final boolean headless) throws IOException {
         final ChromeOptions options = new ChromeOptions();
         if (headless) {
@@ -198,7 +206,7 @@ public class BrowserDriverUtil
         }
         return (WebDriver)chromeDriver;
     }
-    
+
     private static WebDriver createFirefoxDriver(final boolean headless) {
         final FirefoxProfile firefoxProfile = new FirefoxProfile();
         firefoxProfile.setAcceptUntrustedCertificates(true);
@@ -217,7 +225,7 @@ public class BrowserDriverUtil
         firefoxDriver.manage().window().maximize();
         return firefoxDriver;
     }
-    
+
     private static WebDriver createEdgeDriver() {
         final EdgeOptions edgeOptions = new EdgeOptions();
         edgeOptions.setCapability("acceptInsecureCerts", true);
@@ -227,7 +235,7 @@ public class BrowserDriverUtil
         edgeDriver.manage().window().maximize();
         return edgeDriver;
     }
-    
+
     private static WebDriver createSafariDriver() {
         final SafariOptions safariOptions = new SafariOptions();
         final SafariDriver safariDriver = new SafariDriver(safariOptions);
@@ -240,7 +248,7 @@ public class BrowserDriverUtil
         }
         return (WebDriver)safariDriver;
     }
-    
+
     public static WebDriver launchBrowser() {
         init();
         try {
@@ -313,7 +321,7 @@ public class BrowserDriverUtil
         setLongSleep(TimeUnit.SECONDS.toMillis(Long.parseLong(PropertyUtils.getProperty("acs.Sleep.long").trim())));
         return getDriver();
     }
-    
+
     public static void navigateToURL(final String url) {
         try {
             BrowserDriverUtil.loggerBrowser.info("URL IS::: " + url);
@@ -336,7 +344,7 @@ public class BrowserDriverUtil
             Assert.assertTrue(false, "FAILED TO NAVIGATE TO THE URL.");
         }
     }
-    
+
     public static void closeBrwoser() {
         try {
             if (getDriver() != null) {
@@ -347,152 +355,154 @@ public class BrowserDriverUtil
             Assert.fail("BROWSER NOT FOUND!?" + e.toString());
         }
     }
-    
+
     public static WebDriver getDriver() {
+        if(BrowserDriverUtil.driver==null)
+            launchBrowser();
         return BrowserDriverUtil.driver;
     }
-    
+
     public static void setDriver(final WebDriver driver) {
         BrowserDriverUtil.driver = driver;
     }
-    
+
     public static WebDriverWait getImplicitWait() {
         return BrowserDriverUtil.implicitWait;
     }
-    
+
     public static void setImplicitWait(final WebDriverWait implicitWait) {
         BrowserDriverUtil.implicitWait = implicitWait;
     }
-    
+
     public static WebDriverWait getExplicitWait() {
         return BrowserDriverUtil.explicitWait;
     }
-    
+
     public static void setExplicitWait(final WebDriverWait explicitWait) {
         BrowserDriverUtil.explicitWait = explicitWait;
     }
-    
+
     public static WebDriverWait getShortestExplicitWait() {
         return BrowserDriverUtil.shortestExplicitWait;
     }
-    
+
     public static void setShortestExplicitWait(final WebDriverWait shortestExplicitWait) {
         BrowserDriverUtil.shortestExplicitWait = shortestExplicitWait;
     }
-    
+
     public static WebDriverWait getShortExplicitWait() {
         return BrowserDriverUtil.shortExplicitWait;
     }
-    
+
     public static void setShortExplicitWait(final WebDriverWait shortExplicitWait) {
         BrowserDriverUtil.shortExplicitWait = shortExplicitWait;
     }
-    
+
     public static WebDriverWait getMediumExplicitWait() {
         return BrowserDriverUtil.mediumExplicitWait;
     }
-    
+
     public static void setMediumExplicitWait(final WebDriverWait mediumExplicitWait) {
         BrowserDriverUtil.mediumExplicitWait = mediumExplicitWait;
     }
-    
+
     public static WebDriverWait getLongExplicitWait() {
         return BrowserDriverUtil.longExplicitWait;
     }
-    
+
     public static void setLongExplicitWait(final WebDriverWait longExplicitWait) {
         BrowserDriverUtil.longExplicitWait = longExplicitWait;
     }
-    
+
     public static Long getShortSleep() {
         BrowserDriverUtil.loggerBrowser.info("SHORT SLEEP CALLED:::" + PropertyUtils.getProperty("acs.Sleep.short"));
         setSleepTime(Integer.parseInt(PropertyUtils.getProperty("acs.Sleep.short")));
         return BrowserDriverUtil.shortSleep;
     }
-    
+
     public static void setShortSleep(final Long shortSleep) {
         BrowserDriverUtil.shortSleep = shortSleep;
     }
-    
+
     public static Long getMediumSleep() {
         BrowserDriverUtil.loggerBrowser.info("MEDIUM SLEEP CALLED:::" + PropertyUtils.getProperty("acs.Sleep.medium"));
         setSleepTime(Integer.parseInt(PropertyUtils.getProperty("acs.Sleep.medium")));
         return BrowserDriverUtil.mediumSleep;
     }
-    
+
     public static void setMediumSleep(final Long mediumSleep) {
         BrowserDriverUtil.mediumSleep = mediumSleep;
     }
-    
+
     public static Long getLongSleep() {
         BrowserDriverUtil.loggerBrowser.info("LONG SLEEP CALLED:::" + PropertyUtils.getProperty("acs.Sleep.long"));
         setSleepTime(Integer.parseInt(PropertyUtils.getProperty("acs.Sleep.long")));
         return BrowserDriverUtil.longSleep;
     }
-    
+
     public static void setLongSleep(final Long longSleep) {
         BrowserDriverUtil.longSleep = longSleep;
     }
-    
+
     public static Long getShortestSleep() {
         BrowserDriverUtil.loggerBrowser.info("Shortest sleep called:::" + PropertyUtils.getProperty("acs.Sleep.shortest"));
         setSleepTime(Integer.parseInt(PropertyUtils.getProperty("acs.Sleep.shortest")));
         return BrowserDriverUtil.shortestSleep;
     }
-    
+
     public static void setShortestSleep(final Long shortestSleep) {
         BrowserDriverUtil.shortestSleep = shortestSleep;
     }
-    
+
     public static String getDefaultBrowserDownloadPath() {
         return BrowserDriverUtil.defaultBrowserDownloadPath;
     }
-    
+
     public static FluentWait<WebDriver> getShortestFluentWait() {
         return BrowserDriverUtil.shortestFluentWait;
     }
-    
+
     public static FluentWait<WebDriver> getShortFluentWait() {
         return BrowserDriverUtil.shortFluentWait;
     }
-    
+
     public static void setShortestFluentWait(final FluentWait<WebDriver> shortFluentWait) {
         BrowserDriverUtil.shortestFluentWait = BrowserDriverUtil.shortestFluentWait;
     }
-    
+
     public static void setShortFluentWait(final FluentWait<WebDriver> shortFluentWait) {
         BrowserDriverUtil.shortFluentWait = shortFluentWait;
     }
-    
+
     public static FluentWait<WebDriver> getMediumFluentWait() {
         return BrowserDriverUtil.mediumFluentWait;
     }
-    
+
     public static void setMediumFluentWait(final FluentWait<WebDriver> mediumFluentWait) {
         BrowserDriverUtil.mediumFluentWait = mediumFluentWait;
     }
-    
+
     public static FluentWait<WebDriver> getLongFluentWait() {
         return BrowserDriverUtil.longFluentWait;
     }
-    
+
     public static void setLongFluentWait(final FluentWait<WebDriver> longFluentWait) {
         BrowserDriverUtil.longFluentWait = longFluentWait;
     }
-    
+
     public static void setSleepTime(final int sleepTime) {
         BrowserDriverUtil.totalSleepTime += sleepTime;
     }
-    
+
     public static int getTotalSleepTime() {
         return BrowserDriverUtil.totalSleepTime;
     }
-    
+
     public static void resetTotalSleepTime() {
         BrowserDriverUtil.loggerBrowser.info("Resetting Total sleep count");
         BrowserDriverUtil.totalSleepTime = 0;
     }
-    
+
     static {
         BrowserDriverUtil.driver = null;
         BrowserDriverUtil.browser = System.getProperty("browserName");

@@ -14,7 +14,7 @@ import com.oracle.ICICI.common.steps.ReportingSteps;
 import com.oracle.acs.util.BrowserDriverUtil;
 
 import io.cucumber.java.en.Then;
-import com.report.oracle.ofs.ReportGeneration;
+import com.oracle.acs.util.report.ReportGeneration;
 
 public class MassAssignGoalsSteps extends BrowserDriverUtil {
 

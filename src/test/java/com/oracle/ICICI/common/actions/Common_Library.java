@@ -320,7 +320,7 @@ public class Common_Library extends BrowserDriverUtil {
      * @param element WebElement
      * @return boolean
      */
-    public boolean waitForTextToBePresentInElement(WebElement element) {
+    public boolean waitForTextToBePresentInElement(final WebElement element) {
         boolean result = false;
         try {
             element.isDisplayed();
@@ -371,7 +371,7 @@ public class Common_Library extends BrowserDriverUtil {
         try {
             switch (by) {
                 case intFrameNo:
-                    getDriver().switchTo().frame((int) obj);
+                    getDriver().switchTo().frame(Integer.parseInt(obj.toString()));
                     log.info("Switched to Frame using FrameNo");
                     result = true;
                     break;

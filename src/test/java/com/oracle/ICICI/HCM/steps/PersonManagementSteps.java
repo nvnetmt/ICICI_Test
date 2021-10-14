@@ -9,8 +9,8 @@ import com.oracle.ICICI.common.steps.ReportingSteps;
 import com.oracle.acs.util.BrowserDriverUtil;
 
 import io.cucumber.java.en.Then;
-import com.report.oracle.ofs.ReportGeneration;
-import xlsx.databank.ofs.ExcelOperations;
+import com.oracle.acs.util.report.ReportGeneration;
+import com.oracle.acs.util.ExcelOperations;
 
 public class PersonManagementSteps extends BrowserDriverUtil{
 	public static ReportGeneration rpt = ReportingSteps.getRpt();

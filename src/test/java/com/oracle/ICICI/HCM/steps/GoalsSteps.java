@@ -11,7 +11,7 @@ import com.oracle.acs.util.BrowserDriverUtil;
 
 
 import io.cucumber.java.en.Then;
-import com.report.oracle.ofs.ReportGeneration;
+import com.oracle.acs.util.report.ReportGeneration;
 
 public class GoalsSteps extends BrowserDriverUtil {
 	public static ReportGeneration rpt = ReportingSteps.getRpt();

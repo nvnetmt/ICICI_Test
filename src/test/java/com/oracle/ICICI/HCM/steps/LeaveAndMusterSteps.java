@@ -12,8 +12,8 @@ import com.oracle.ICICI.common.steps.DatabankInitialization;
 import com.oracle.ICICI.common.steps.ReportingSteps;
 
 import io.cucumber.java.en.Then;
-import com.report.oracle.ofs.ReportGeneration;
-import xlsx.databank.ofs.ExcelOperations;
+import com.oracle.acs.util.report.ReportGeneration;
+import com.oracle.acs.util.ExcelOperations;
 
 
 
