@@ -8,8 +8,9 @@ import io.cucumber.junit.Cucumber;
 @CucumberOptions(
 
         tags = " @T001", features = { "src/test/java/com/oracle/ICICI/HCM/features" },
-        		plugin = { "pretty", "json:target/json/report.json",
-        				"html:target/html/ofs"}, glue = {  "com.oracle.ICICI.common.steps",
+        		plugin = {"html:target/cucumber-html-report", "json:target/cucumber.json",
+						"pretty:target/cucumber-pretty.txt","usage:target/cucumber-usage.json",
+						"junit:target/cucumber-results.xml"}, glue = {  "com.oracle.ICICI.common.steps",
                         "com.oracle.ICICI.common.runners", "com.oracle.ICICI.HCM.steps" }, dryRun = false)
 
 public class DevelopmentRunner {
