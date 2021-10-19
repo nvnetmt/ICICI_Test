@@ -4,7 +4,7 @@
 
 package com.oracle.acs.util;
 
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openqa.selenium.By;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -13,6 +13,7 @@ import org.openqa.selenium.NoSuchElementException;
 import java.time.Duration;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
@@ -29,7 +30,6 @@ import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
