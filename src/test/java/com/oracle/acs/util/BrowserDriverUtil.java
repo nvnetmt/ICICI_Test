@@ -5,6 +5,7 @@
 package com.oracle.acs.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -78,6 +79,10 @@ public class BrowserDriverUtil
 
     public static void init() {
         try {
+
+            WebDriverManager.chromedriver().setup();
+            WebDriver driver = new ChromeDriver();
+            driver.get("http://www.total-qa.com");
             try{
                 PropertyUtils.loadProperties(new FileInputStream("src/test/resources/propertyFiles/default/system-default.properties"),true);
                 PropertyUtils.loadProperties(new FileInputStream("src/test/resources/propertyFiles/ofs-dev/dev.properties"),true);
