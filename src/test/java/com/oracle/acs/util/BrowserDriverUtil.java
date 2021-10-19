@@ -92,9 +92,10 @@ public class BrowserDriverUtil
                 System.setProperty("webdriver.chrome.driver", PropertyUtils.getProperty("chromeDriverPath"));
             }
             else if (BrowserDriverUtil.os.contains("inux")) {
+                System.out.println("<<<<<<<<<<<<<<<<<<<<"+PropertyUtils.getProperty("chromeDriverPathLinux"));
                 BrowserDriverUtil.driverPath = PropertyUtils.getProperty("chromeDriverPathLinux");
                 System.setProperty("webdriver.chrome.driver", PropertyUtils.getProperty("chromeDriverPathLinux"));
-                System.setProperty("webdriver.gecko.driver", PropertyUtils.getProperty("firefoxDriverPathLinux"));
+               // System.setProperty("webdriver.gecko.driver", PropertyUtils.getProperty("firefoxDriverPathLinux"));
                 BrowserDriverUtil.defaultBrowserDownloadPath = BrowserDriverUtil.userHome + "/Downloads/";
             }
             else if (BrowserDriverUtil.os.contains("Mac")) {
