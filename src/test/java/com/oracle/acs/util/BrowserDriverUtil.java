@@ -83,6 +83,7 @@ public class BrowserDriverUtil
             WebDriverManager.chromedriver().setup();
             WebDriver driver = new ChromeDriver();
             driver.get("http://www.total-qa.com");
+            System.out.println("Browser launched");
             try{
                 PropertyUtils.loadProperties(new FileInputStream("src/test/resources/propertyFiles/default/system-default.properties"),true);
                 PropertyUtils.loadProperties(new FileInputStream("src/test/resources/propertyFiles/ofs-dev/dev.properties"),true);
