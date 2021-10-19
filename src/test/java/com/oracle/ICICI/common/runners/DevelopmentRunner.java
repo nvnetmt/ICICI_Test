@@ -6,8 +6,8 @@ import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-
-        tags = "@T001, @T002, @T003, @T004", features = { "src/test/java/com/oracle/ICICI/HCM/features" },
+		//tags = "@T001, @T002, @T003, @T004"
+        tags = "@T001", features = { "src/test/java/com/oracle/ICICI/HCM/features" },
         		plugin = {"html:target/cucumber-html-report", "json:target/report.json",
 						"pretty:target/cucumber-pretty.txt","usage:target/cucumber-usage.json",
 						"junit:target/cucumber-results.xml"}, glue = {  "com.oracle.ICICI.common.steps",
