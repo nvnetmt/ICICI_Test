@@ -191,7 +191,13 @@ public class BrowserDriverUtil
         final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability("goog:chromeOptions", (Object)options);
         capabilities.setCapability("acceptInsecureCerts", true);
+
+        //Added on 20-ct-2021
+
+        WebDriverManager.chromedriver().setup();
         final ChromeDriverService driverService = ChromeDriverService.createDefaultService();
+
+
         BrowserDriverUtil.loggerBrowser.info("Chrome Driver Capabilities: {}", (Object)capabilities);
         final ChromeDriver chromeDriver = new ChromeDriver(driverService, (Capabilities)capabilities);
         chromeDriver.manage().deleteAllCookies();
