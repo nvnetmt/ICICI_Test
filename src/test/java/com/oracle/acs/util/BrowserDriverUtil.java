@@ -80,9 +80,9 @@ public class BrowserDriverUtil
     public static void init() {
         try {
 
-            WebDriverManager.chromedriver().setup();
-            WebDriver driver = new ChromeDriver();
-            driver.get("http://www.total-qa.com");
+//            WebDriverManager.chromedriver().setup();
+//            WebDriver driver = new ChromeDriver();
+//            driver.get("http://www.total-qa.com");
             System.out.println("Browser launched");
             try{
                 PropertyUtils.loadProperties(new FileInputStream("src/test/resources/propertyFiles/default/system-default.properties"),true);
@@ -193,9 +193,9 @@ public class BrowserDriverUtil
         capabilities.setCapability("acceptInsecureCerts", true);
 
         //Added on 20-ct-2021
-
-        WebDriverManager.chromedriver().setup();
+        //WebDriverManager.chromedriver().setup();
         final ChromeDriverService driverService = ChromeDriverService.createDefaultService();
+
 
 
         BrowserDriverUtil.loggerBrowser.info("Chrome Driver Capabilities: {}", (Object)capabilities);
@@ -243,7 +243,8 @@ public class BrowserDriverUtil
         final EdgeOptions edgeOptions = new EdgeOptions();
         edgeOptions.setCapability("acceptInsecureCerts", true);
         edgeOptions.setCapability("acceptSslCerts", true);
-        System.setProperty("webdriver.edge.driver", PropertyUtils.getProperty("ieDriverPath"));
+        //System.setProperty("webdriver.edge.driver", PropertyUtils.getProperty("ieDriverPath"));
+        WebDriverManager.edgedriver().setup();  // Added on 22-OCT as part of change
         final WebDriver edgeDriver = (WebDriver)new EdgeDriver(edgeOptions);
         edgeDriver.manage().window().maximize();
         return edgeDriver;
